@@ -3,8 +3,17 @@
  * Main application logic for receiving and displaying lane detection data
  */
 
-// Import ROSLIB
-const ROSLIB = require("roslib");
+// Resolve ROSLIB in both browser (global) and Node environments
+let ROSLIB;
+if (typeof window !== "undefined" && window.ROSLIB) {
+  ROSLIB = window.ROSLIB;
+} else if (typeof require === "function") {
+  ROSLIB = require("roslib");
+} else {
+  throw new Error(
+    "ROSLIB library not found. Make sure to load roslib.js before app.js"
+  );
+}
 
 class BaseStation {
   constructor() {
@@ -354,10 +363,9 @@ class BaseStation {
     }
 
     if (data.obstacleDistance !== undefined) {
+      const distanceCm = Number(data.obstacleDistance) || 0;
       document.getElementById("obstacleDistance").textContent =
-        data.obstacleDistance > 0
-          ? `${data.obstacleDistance.toFixed(2)} m`
-          : "- m";
+        distanceCm > 0 ? `${distanceCm.toFixed(0)} cm` : "- cm";
     }
 
     if (data.obstaclePosition !== undefined) {

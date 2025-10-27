@@ -124,7 +124,7 @@ Kirim data dalam format JSON:
 {
 "type": "obstacle",
 "detected": true,
-"distance": 2.5,
+"distance": 250,
 "position": "center"
 }
 ```
@@ -155,7 +155,7 @@ Base Station membutuhkan data berikut untuk ditampilkan:
 4. **Obstacle** (OPTIONAL - `type: "obstacle"`)
    - Hanya kirim jika program kalian punya fitur deteksi obstacle
    - **detected**: boolean (true/false)
-   - **distance**: jarak ke obstacle (meter)
+   - **distance**: jarak ke obstacle (centimeter)
    - **position**: posisi obstacle ("left", "center", "right")
 
 #### Contoh Python Client (WebSocket)
@@ -434,7 +434,7 @@ main()
 Hanya perlu dikirim jika program kalian memiliki fitur deteksi obstacle:
 
 - **detected**: `true` atau `false`
-- **distance**: Jarak ke obstacle dalam meter
+- **distance**: Jarak ke obstacle dalam centimeter
 - **position**:
   - `"left"`: Obstacle di kiri
   - `"center"`: Obstacle di tengah
