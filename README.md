@@ -64,13 +64,17 @@ Base Station ini dibuat untuk Final Project Magang Tim IRIS. Aplikasi ini meneri
 ### Cara 2: Menggunakan Local Server (Recommended)
 
 ```bash
+
 # Menggunakan Python
+
 python -m http.server 8000
 
 # Atau menggunakan Node.js
+
 npx serve
 
 # Atau menggunakan PHP
+
 php -S localhost:8000
 ```
 
@@ -91,37 +95,37 @@ Kirim data dalam format JSON:
 ```json
 // Image Raw
 {
-  "type": "image_raw",
-  "data": "base64_encoded_image_data",
-  "width": 640,
-  "height": 480
+"type": "image_raw",
+"data": "base64_encoded_image_data",
+"width": 640,
+"height": 480
 }
 
 // Image Processed
 {
-  "type": "image_processed",
-  "data": "base64_encoded_image_data",
-  "width": 640,
-  "height": 480
+"type": "image_processed",
+"data": "base64_encoded_image_data",
+"width": 640,
+"height": 480
 }
 
 // Telemetry (Data Utama yang Wajib Dikirim)
 {
-  "type": "telemetry",
-  "data": {
-    "speed": 25.5,           // Speed dalam cm/s (opsional, bisa ganti ke 0)
-    "laneStatus": "Detected", // Status: "Detected", "Partial", "Lost" (wajib)
-    "angle": 15.5,           // Sudut steering dalam derajat (wajib)
-    "jarakTempuh": 125.3     // Jarak tempuh dalam meter (wajib)
-  }
+"type": "telemetry",
+"data": {
+"speed": 25.5, // Speed dalam cm/s (opsional)
+"laneStatus": "Detected", // Status: "Detected", "Partial", "Lost" (wajib)
+"angle": 15.5, // Sudut steering dalam derajat (wajib)
+"jarakTempuh": 125.3 // Jarak tempuh dalam meter (wajib)
+}
 }
 
 // Obstacle (Optional - hanya jika ada fitur deteksi obstacle)
 {
-  "type": "obstacle",
-  "detected": true,
-  "distance": 2.5,
-  "position": "center"
+"type": "obstacle",
+"detected": true,
+"distance": 2.5,
+"position": "center"
 }
 ```
 
@@ -164,10 +168,10 @@ import cv2
 import base64
 
 async def send_data():
-    uri = "ws://localhost:8080"
-    async with websockets.connect(uri) as websocket:
-        cap = cv2.VideoCapture(0)
-        jarak_tempuh = 0.0
+uri = "ws://localhost:8080"
+async with websockets.connect(uri) as websocket:
+cap = cv2.VideoCapture(0)
+jarak_tempuh = 0.0
 
         while True:
             ret, frame = cap.read()
@@ -244,8 +248,8 @@ using json = nlohmann::json;
 typedef websocketpp::client<websocketpp::config::asio_client> client;
 
 int main() {
-    client c;
-    websocketpp::connection_hdl hdl;
+client c;
+websocketpp::connection_hdl hdl;
 
     // Initialize WebSocket connection
     // ... (connection setup code)
@@ -291,6 +295,7 @@ int main() {
     }
 
     return 0;
+
 }
 ```
 
@@ -303,10 +308,13 @@ Untuk program yang menggunakan ROS 2.
 #### Setup ROS Bridge
 
 ```bash
+
 # Install rosbridge_suite
+
 sudo apt install ros-<distro>-rosbridge-suite
 
 # Run rosbridge
+
 ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 ```
 
@@ -328,8 +336,8 @@ from std_msgs.msg import Float32
 import cv2
 
 class LaneDetectionNode(Node):
-    def __init__(self):
-        super().__init__('lane_detection_node')
+def **init**(self):
+super().**init**('lane_detection_node')
 
         # Publishers
         self.pub_raw = self.create_publisher(
@@ -382,14 +390,14 @@ class LaneDetectionNode(Node):
         return 0.0
 
 def main():
-    rclpy.init()
-    node = LaneDetectionNode()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+rclpy.init()
+node = LaneDetectionNode()
+rclpy.spin(node)
+node.destroy_node()
+rclpy.shutdown()
 
-if __name__ == '__main__':
-    main()
+if **name** == '**main**':
+main()
 ```
 
 ## 📊 Data Format
@@ -440,15 +448,15 @@ Edit bagian `tailwind.config` di `index.html`:
 
 ```javascript
 tailwind.config = {
-    theme: {
-        extend: {
-            colors: {
-                // Customize colors here
-                primary: { ... },
-                secondary: { ... }
-            }
-        }
-    }
+theme: {
+extend: {
+colors: {
+// Customize colors here
+primary: { ... },
+secondary: { ... }
+}
+}
+}
 }
 ```
 
@@ -536,10 +544,10 @@ Pastikan program kalian bisa:
 - [ ] Kirim raw image ke Base Station
 - [ ] Process image (threshold/lane detection)
 - [ ] Kirim processed image ke Base Station
-- [ ] Hitung dan kirim speed (cm/s)
+- [ ] Hitung dan kirim speed (cm/s) (Opsional)
 - [ ] Hitung dan kirim angle (derajat)
 - [ ] Hitung dan kirim jarak tempuh (meter)
-- [ ] Kirim lane status ("Detected", "Partial", "Lost")
+- [ ] Kirim lane status ("Detected", "Partial", "Lost", terserah....)
 - [ ] (Optional) Deteksi dan kirim data obstacle
 
 ## 📚 Resources
@@ -555,7 +563,7 @@ Jika ada pertanyaan atau masalah:
 
 1. Check troubleshooting section
 2. Review example code
-3. Tanya mentor/pembimbing
+3. Tanya ke bengkel
 
 ## 📄 License
 
@@ -565,4 +573,4 @@ Project ini dibuat untuk keperluan internal Tim IRIS.
 
 **Good luck dengan Final Project kalian! 🚀**
 
-_Made with ❤️ untuk Anak Magang IRIS 2025_
+_Made with ❤️ untuk Anak Magang Tim IRIS_

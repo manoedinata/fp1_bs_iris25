@@ -377,9 +377,9 @@
 
         <!-- Telemetry Data -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <!-- Speed -->
+            <!-- Steering Angle -->
             <div class="card">
-                <h3 class="text-md font-semibold mb-4">Speed</h3>
+                <h3 class="text-md font-semibold mb-4">Steering Angle</h3>
                 <div class="steering-gauge">
                     <svg width="200" height="100" viewBox="0 0 200 100">
                         <path class="gauge-arc" d="M 20 100 A 80 80 0 0 1 180 100" />
@@ -388,12 +388,12 @@
                     </svg>
                 </div>
                 <div class="text-center mt-2">
-                    <div class="metric-value" id="steeringValue">0 cm/s</div>
-                    <div class="metric-label">Current Speed</div>
+                    <div class="metric-value" id="steeringValue">0°</div>
+                    <div class="metric-label">Current Angle</div>
                 </div>
             </div>
 
-            <!-- Simplified Lane Detection card - removed dropdown, show only Lane Status, Angle, and Jarak Tempuh -->
+            <!-- Simplified Lane Detection card - removed dropdown, show only Lane Status, Speed, and Jarak Tempuh -->
             <div class="card">
                 <h3 class="text-md font-semibold mb-4">Lane Detection</h3>
                 <div class="space-y-4">
@@ -402,8 +402,8 @@
                         <span class="badge badge-success" id="laneStatus">Detected</span>
                     </div>
                     <div>
-                        <div class="text-sm text-[hsl(240,5%,64.9%)] mb-1">Angle</div>
-                        <div class="metric-value text-2xl" id="angleValue">0°</div>
+                        <div class="text-sm text-[hsl(240,5%,64.9%)] mb-1">Speed</div>
+                        <div class="metric-value text-2xl" id="speedValue">0 cm/s</div>
                     </div>
                     <div>
                         <div class="text-sm text-[hsl(240,5%,64.9%)] mb-1">Jarak Tempuh</div>

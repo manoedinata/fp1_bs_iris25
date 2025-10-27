@@ -25,9 +25,9 @@ class BaseStation {
     this.processedFpsCounter = new FPSCounter("processedFps");
 
     this.telemetryData = {
-      speed: 0,
+      steering_angle: 0,
       laneStatus: "Unknown",
-      angle: 0,
+      speed: 0,
       jarakTempuh: 0,
       laneWidth: 0,
       deviation: 0,
@@ -200,6 +200,17 @@ class BaseStation {
       this.processedFpsCounter.tick();
     });
 
+    // Subscribe to steering angle topic
+    const steeringListener = new ROSLIB.Topic({
+      ros: this.ros,
+      name: speedTopic,
+      messageType: "std_msgs/Float32",
+    });
+
+    steeringListener.subscribe((message) => {
+      this.updateTelemetry({ steering_angle: message.data });
+    });
+
     // Subscribe to speed topic
     const speedListener = new ROSLIB.Topic({
       ros: this.ros,
@@ -246,8 +257,8 @@ class BaseStation {
           this.updateTelemetry(message.data);
           break;
 
-        case "speed":
-          this.updateTelemetry({ speed: message.value });
+        case "steering_angle":
+          this.updateTelemetry({ steering_angle: message.value });
           break;
 
         case "obstacle":
@@ -305,13 +316,12 @@ class BaseStation {
     // Update internal state
     Object.assign(this.telemetryData, data);
 
-    // Update speed
-    if (data.speed !== undefined) {
-      const speed = data.speed;
-      document.getElementById("steeringValue").textContent = `${speed.toFixed(
+    if (data.steering_angle !== undefined) {
+      const angle = data.steering_angle;
+      document.getElementById("steeringValue").textContent = `${angle.toFixed(
         1
-      )} cm/s`;
-      this.updateSteeringGauge(speed);
+      )}°`;
+      this.updateSteeringGauge(angle);
     }
 
     // Update lane detection
@@ -323,10 +333,10 @@ class BaseStation {
         (data.laneStatus === "Detected" ? "badge-success" : "badge-warning");
     }
 
-    if (data.angle !== undefined) {
-      document.getElementById("angleValue").textContent = `${data.angle.toFixed(
+    if (data.speed !== undefined) {
+      document.getElementById("speedValue").textContent = `${data.speed.toFixed(
         1
-      )}°`;
+      )} cm/s`;
     }
 
     if (data.jarakTempuh !== undefined) {
