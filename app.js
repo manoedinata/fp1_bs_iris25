@@ -494,4 +494,13 @@ class FPSCounter {
 // Initialize application when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   window.baseStation = new BaseStation();
+  window.baseStation.connect();
+
+  // While disconnected, auto connect in each 5 seconds
+  setInterval(() => {
+    if (!window.baseStation.connected) {
+      window.baseStation.log("Attempting automatic re-connect...", "info");
+      window.baseStation.connect();
+    }
+  }, 5000);
 });
