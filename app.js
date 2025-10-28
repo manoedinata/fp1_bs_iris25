@@ -70,8 +70,8 @@ class BaseStation {
         } else {
           rosSettings.classList.add("hidden");
           document.getElementById("serverUrl").placeholder =
-            "ws://localhost:8080";
-          document.getElementById("serverUrl").value = "ws://localhost:8080";
+            "ws://localhost:8765";
+          document.getElementById("serverUrl").value = "ws://localhost:8765";
         }
       });
 
