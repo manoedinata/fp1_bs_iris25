@@ -2,6 +2,8 @@
 
 Base Station untuk monitoring dan visualisasi data lane detection dari program vision processing. Mendukung koneksi via WebSocket standar atau ROS (roslibjs).
 
+Base Station digunakan pada Final Project Intern IRIS untuk menampilkan data real-time dari program yang mendeteksi jalur menggunakan OpenCV. Cek disini: <https://github.com/manoedinata/IRIS-FP1>
+
 ## 📋 Deskripsi
 
 Base Station ini dibuat untuk Final Project Magang Tim IRIS. Aplikasi ini menerima data real-time dari program vision processing yang mendeteksi jalur menggunakan OpenCV, termasuk:
