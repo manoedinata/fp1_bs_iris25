@@ -318,7 +318,7 @@
             >
             <select id="connectionType" class="input">
               <option value="websocket">Standard WebSocket</option>
-              <option value="ros">ROS (roslibjs)</option>
+              <option value="ros" selected>ROS (roslibjs)</option>
             </select>
           </div>
           <div>
@@ -327,14 +327,14 @@
               type="text"
               id="serverUrl"
               class="input"
-              placeholder="ws://localhost:8765"
-              value="ws://localhost:8765"
+              placeholder="ws://localhost:9090"
+              value="ws://localhost:9090"
             />
           </div>
         </div>
 
         <!-- ROS Specific Settings (Hidden by default) -->
-        <div id="rosSettings" class="hidden mb-4">
+        <div id="rosSettings" class="mb-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium mb-2"

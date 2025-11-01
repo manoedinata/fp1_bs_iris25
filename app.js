@@ -19,7 +19,7 @@ class BaseStation {
   constructor() {
     // Connection state
     this.connected = false;
-    this.connectionType = "websocket";
+    this.connectionType = "ros";
     this.ws = null;
     this.ros = null;
 
