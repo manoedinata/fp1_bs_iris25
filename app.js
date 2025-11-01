@@ -183,7 +183,10 @@ class BaseStation {
   subscribeToROSTopics() {
     const rawTopic = document.getElementById("rosTopicRaw").value;
     const processedTopic = document.getElementById("rosTopicProcessed").value;
-    const speedTopic = document.getElementById("rosTopicSteering").value;
+    const steeringTopic = document.getElementById("rosTopicSteering").value;
+    const speedTopic = document.getElementById("rosTopicSpeed").value;
+    const distanceTopic = document.getElementById("rosTopicDistance").value;
+    const statusTopic = document.getElementById("rosTopicStatus").value;
 
     // Subscribe to raw image topic
     const rawImageListener = new ROSLIB.Topic({
@@ -212,7 +215,7 @@ class BaseStation {
     // Subscribe to steering angle topic
     const steeringListener = new ROSLIB.Topic({
       ros: this.ros,
-      name: speedTopic,
+      name: steeringTopic,
       messageType: "std_msgs/Float32",
     });
 
@@ -229,6 +232,28 @@ class BaseStation {
 
     speedListener.subscribe((message) => {
       this.updateTelemetry({ speed: message.data });
+    });
+
+    // Subscribe to distance topic
+    const distanceListener = new ROSLIB.Topic({
+      ros: this.ros,
+      name: distanceTopic,
+      messageType: "std_msgs/Float32",
+    });
+
+    distanceListener.subscribe((message) => {
+      this.updateTelemetry({ jarakTempuh: message.data });
+    });
+
+    // Subscribe to status topic
+    const statusListener = new ROSLIB.Topic({
+      ros: this.ros,
+      name: statusTopic,
+      messageType: "std_msgs/String",
+    });
+
+    statusListener.subscribe((message) => {
+      this.updateTelemetry({ laneStatus: message.data });
     });
 
     this.log("Subscribed to ROS topics", "success");
