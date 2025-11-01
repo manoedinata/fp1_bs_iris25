@@ -187,6 +187,9 @@ class BaseStation {
     const speedTopic = document.getElementById("rosTopicSpeed").value;
     const distanceTopic = document.getElementById("rosTopicDistance").value;
     const statusTopic = document.getElementById("rosTopicStatus").value;
+    const obstacleStatusTopic = document.getElementById(
+      "rosTopicObstacleStatus"
+    ).value;
 
     // Subscribe to raw image topic
     const rawImageListener = new ROSLIB.Topic({
@@ -254,6 +257,17 @@ class BaseStation {
 
     statusListener.subscribe((message) => {
       this.updateTelemetry({ laneStatus: message.data });
+    });
+
+    // Subscribe to obstacle status topic
+    const obstacleStatusListener = new ROSLIB.Topic({
+      ros: this.ros,
+      name: obstacleStatusTopic,
+      messageType: "std_msgs/String",
+    });
+
+    obstacleStatusListener.subscribe((message) => {
+      this.updateTelemetry({ obstacleDetected: message.data });
     });
 
     this.log("Subscribed to ROS topics", "success");
@@ -382,9 +396,10 @@ class BaseStation {
     // Update obstacle detection
     if (data.obstacleDetected !== undefined) {
       const obstacleBadge = document.getElementById("obstacleStatus");
-      obstacleBadge.textContent = data.obstacleDetected ? "Detected" : "None";
+      obstacleBadge.textContent = data.obstacleDetected;
       obstacleBadge.className =
-        "badge " + (data.obstacleDetected ? "badge-error" : "badge-success");
+        "badge " +
+        (data.obstacleDetected == "Detected" ? "badge-error" : "badge-success");
     }
 
     if (data.obstacleDistance !== undefined) {
